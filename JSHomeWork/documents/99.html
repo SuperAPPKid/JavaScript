@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99</title>
+    <style>
+        *{
+            padding:auto;
+            margin:auto;
+        }
+        table,
+        td {
+            margin-top: 7.5%;
+            border: #00fff5 solid 3px;
+            border-collapse: collapse;
+            background-color: rgba(71, 84, 100, 0.71);
+            font-size: 14px;
+            color: beige;
+            padding: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <tr id="nine">
+        </tr>
+    </table>
+    <script>
+        for (var i = 2; i < 10; i++) {
+            var td = document.createElement("td");
+            document.getElementById("nine").appendChild(td);
+            for (var j = 1; j < 10; j++) {
+                var text = document.createTextNode(i + " * " + j + " = " + i * j);
+                var br = document.createElement("br");
+                td.appendChild(text);
+                td.appendChild(br);
+            }
+        }
+    </script>
+</body>
+
+</html>

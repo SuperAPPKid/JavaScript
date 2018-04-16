@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>star</title>
+    <style>
+        div {
+            border: 4px rgb(53, 177, 140) solid;
+            width: 80%;
+            margin: auto;
+            margin-top: 5%;
+            padding-top: 50px;
+            align-content: center;
+            background-color: azure;
+            border-radius: 20px;
+            text-align: center;
+        }
+
+        img {
+            width: 18%;
+            background-color: azure;
+        }
+
+        p {
+            font-size: 2em;
+            font-weight: 500;
+            color: rgb(75, 143, 84);
+            background-color: azure;
+        }
+
+        #ing {
+            height: 50px;
+        }
+
+        .init {
+            display: initial;
+        }
+
+        .block {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <img class="init" id="star1" src="Images/star.gif" />
+        <img class="hide" id="finstar1" src="Images/chngstar.gif" />
+        <img class="init" id="star2" src="Images/star.gif" />
+        <img class="hide" id="finstar2" src="Images/chngstar.gif" />
+        <img class="init" id="star3" src="Images/star.gif" />
+        <img class="hide" id="finstar3" src="Images/chngstar.gif" />
+        <img class="init" id="star4" src="Images/star.gif" />
+        <img class="hide" id="finstar4" src="Images/chngstar.gif" />
+        <img class="init" id="star5" src="Images/star.gif" />
+        <img class="hide" id="finstar5" src="Images/chngstar.gif" />
+        <p id="text">請給分</p>
+        <p id="point" class="hide"></p>
+    </div>
+    <script>
+        var imgar = [document.getElementById("star1"), document.getElementById("star2"), document.getElementById(
+            "star3"), document.getElementById("star4"), document.getElementById("star5")]
+        var finimgar = [document.getElementById("finstar1"), document.getElementById("finstar2"), document.getElementById(
+            "finstar3"), document.getElementById("finstar4"), document.getElementById("finstar5")]
+            
+        for (i = 0; i < 5; i++) {
+            imgar[i].onmouseover = mouseover;
+            imgar[i].onmouseout = mouseout;
+            imgar[i].onclick = click1;
+            finimgar[i].onclick = click2;
+        }
+
+        function click1() {
+            for (var i = 0; i <= imgar.indexOf(this); i++) {
+                imgar[i].className = "hide";
+                finimgar[i].className = "init";
+            }
+            document.getElementById("text").className = "hide";
+            document.getElementById("point").innerHTML = i + "顆星";
+            document.getElementById("point").className = "block";
+            for (var i = imgar.indexOf(this) + 1; i < 5; i++) {
+                imgar[i].className = "hide";
+                finimgar[i].src = "Images/star.gif";
+                finimgar[i].className = "init";
+            }
+        }
+
+        function click2() {
+            for (var i = 0; i < 5; i++) {
+                imgar[i].className = "init";
+                imgar[i].src = "Images/star.gif";
+                finimgar[i].src = "Images/chngstar.gif";
+                finimgar[i].className = "hide";
+            }
+            document.getElementById("text").className = "block";
+            document.getElementById("point").className = "hide";
+        }
+
+        function mouseover() {
+            for (var i = 0; i <= imgar.indexOf(this); i++) {
+                imgar[i].src = "Images/chngstar.gif"
+            }
+            document.getElementById("text").innerHTML = "打分中..." + i + "分";
+        }
+
+        function mouseout() {
+            for (var i = 0; i <= imgar.indexOf(this); i++) {
+                imgar[i].src = "Images/star.gif";
+            }
+            document.getElementById("text").innerHTML = "請給分";
+        }
+    </script>
+</body>
+
+</html>

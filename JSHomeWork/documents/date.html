@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+
+<head>
+    <meta charset="utf-8" />
+    <title>date.html</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            color: rgba(39, 47, 116, 0.831);
+        }
+        #outter {
+            width: 80%;
+            margin: auto;
+            margin-top: 5%;
+            border: rgba(39, 47, 116, 0.79) 5px solid;
+            background-color: #2e1d2037;
+            padding: 30px 50px 25px 50px;
+            border-radius: 50px;
+        }
+
+        #down{
+            padding-top: 15px;
+            border-top: rgba(39, 47, 116, 0.79) 3px dashed;
+        }
+        #down span{
+            font-size: 24px;
+        }
+        span {
+            
+            font-weight: bolder;
+            font-size: 52px;
+        }
+
+        select {
+            font-weight: bolder;
+            background-color: rgba(48, 34, 62, 0.297);
+            border: rebeccapurple(255, 0, 0, 0.468) solid 3px;
+            height: 52px;
+            width: 13%;
+            font-size: 24px;
+            margin-right: 2%;
+            position: relative;
+            top: -6px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.onload = function () {
+            document.getElementById("idSelectYear").onchange = function(){addDate();result();};
+            document.getElementById("idSelectMonth").onchange = function(){addDate();result();};
+            document.getElementById("idSelectDate").onchange = result;
+            addDate();
+            for (i = 1; i <= 12; i++) { //新增月 
+                var opt = window.document.createElement("option");
+                opt.setAttribute("value", i);
+                var optName = document.createTextNode(i);
+                opt.appendChild(optName);
+                document.getElementById('idSelectMonth').appendChild(opt);
+            }
+            for (i = 2010; i <= 2020; i++) { //新增年 
+                var opt = window.document.createElement("option");
+                opt.setAttribute("value", i);
+                var optName = document.createTextNode(i);
+                opt.appendChild(optName);
+                document.getElementById('idSelectYear').appendChild(opt);
+            }
+
+            function addDate() {
+                document.getElementById('idSelectDate').innerHTML = "";
+                var year = document.getElementById("idSelectYear").value;
+                var month = document.getElementById("idSelectMonth").value;
+                var d = new Date(year, month, 0);
+                var date = d.getDate();
+                for (var i = 1; i <= date; i++) {
+                    var opt = window.document.createElement("option");
+                    opt.setAttribute("value", i);
+                    var optName = document.createTextNode(i);
+                    opt.appendChild(optName);
+                    document.getElementById('idSelectDate').appendChild(opt);
+                }
+            }
+
+            function result() {
+                var year = document.getElementById("idSelectYear").value;
+                var month = document.getElementById("idSelectMonth").value;
+                var date = document.getElementById("idSelectDate").value;
+                document.getElementById("idsp").textContent = year + "年" + month + "月" + date + "日";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div id="outter">
+        <div id="up">
+            <span>年：</span>
+            <select id="idSelectYear"></select>
+            <span>月：</span>
+            <select id="idSelectMonth"></select>
+            <span>日：</span>
+            <select id="idSelectDate"></select>
+        </div>
+        <div id="down">
+            <p>你選擇的日期是：<span id="idsp"></span></p>
+        </div>
+    </div>
+</body>
+
+</html>

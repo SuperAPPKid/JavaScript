@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IDcheck</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: auto;
+            padding: 0;
+        }
+        #formBox {
+            margin-top: 5%; 
+            width: 75%;
+        }
+        fieldset {
+            border: solid 2px rgb(141, 45, 45);
+            padding: 0 2% 2% 2%;
+            border-radius: 20px;
+            border-radius: 15px;
+            background-color: rgba(250, 235, 215, 0.678);
+        }
+        legend {
+            width: 15%;
+            text-align: center;
+            color: rgba(73, 61, 7, 0.801);
+            border-radius: 5px;
+            font-size: 1em;
+            letter-spacing: 0.1em;
+            line-height: 2em;
+            font-weight:bolder;
+            border-radius: 15px;
+            background-color: rgba(250, 235, 215, 0.678);
+        }
+        .row{
+            padding-top: 2%;
+            padding-bottom: 1%;
+            border-bottom:dashed 1px rgba(73, 61, 7, 0.801);
+        }
+        .button{
+            padding-top: 2%;
+            padding-bottom: 0.5%;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="formBox">
+        <form>
+            <fieldset>
+                <legend>驗證表格</legend>
+                <div class="row">
+                    <label for="name">姓名</label>
+                    <input type="text" name="name" id="name" placeholder="請輸入姓名">
+                    <span id=namesp></span>
+                    <p>1.不可空白 2.姓名至少兩個字 3.姓名必須為中文</p>
+                </div>
+                <div class="row">
+                    <label for="pwd">密碼</label>
+                    <input type="password" name="pwd" id="pwd" placeholder="請輸入密碼">
+                    <span id=pwdsp></span>
+                    <p>1.不可空白 2.密碼至少6個字，並且必須包含英文字母、數字、特殊字元[！＠＃＄％＆＊]</p>
+                </div>
+                <div class="row">
+                    <label for="date">日期</label>
+                    <input type="text" name="date" id="date" placeholder="xxxx/xx/xx">
+                    <span id=datesp></span>
+                    <p>格式：西元年/月/日</p>
+                </div>
+                <div class="button">
+                    <input type="reset">
+                    <input type="submit" value="送出">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <script>
+        document.getElementById("name").onblur = chkName;
+        document.getElementById("pwd").onblur = chkPwd;
+        document.getElementById("date").onblur = chkDate;
+
+        function chkName() {
+            var name = document.getElementById("name").value;
+            for (var i = 0; i < name.length; i++) {
+                if (name[i] == " ") {
+                    document.getElementById("namesp").innerHTML = "<img src='./Images/no.png'>不可有空白";
+                    break;
+                } else if (name.charCodeAt(i) <= 0x4e00 || name.charCodeAt(i) >= 0x9fff) {
+                    document.getElementById("namesp").innerHTML = "<img src='./Images/no.png'>姓名必須為中文";
+                    break;
+                } else
+                    document.getElementById("namesp").innerHTML = "<img src='./Images/yes.png'>輸入正確"
+            }
+            if (name.length < 2)
+                document.getElementById("namesp").innerHTML = "<img src='./Images/no.png'>姓名必須至少兩個字";
+            if (name == "")
+                document.getElementById("namesp").innerHTML = "<img src='./Images/no.png'>姓名不可為空白";
+        }
+
+        function chkPwd() {
+            var pwd = document.getElementById("pwd").value.toUpperCase();
+            var regChar = /[A-Z]/;
+            var regNum = /[0-9]/;
+            var regSym = /(!|@|#|%|&|\$|\*|\^)/;
+            var isChar = false;
+            var isNum = false;
+            var isSym = false;
+            for (var i = 0; i < pwd.length; i++) {
+                if (pwd[i] == " ") {
+                    document.getElementById("pwdsp").innerHTML = "<img src='./Images/no.png'>不可有空白";
+                    break;
+                } else if (regChar.test(pwd[i]))
+                    isChar = true;
+                else if (regNum.test(pwd[i]))
+                    isNum = true;
+                else if (regSym.test(pwd[i]))
+                    isSym = true;
+            }
+            if (isChar && isNum && isSym)
+                document.getElementById("pwdsp").innerHTML = "<img src='./Images/yes.png'>輸入正確";
+            else
+                document.getElementById("pwdsp").innerHTML = "<img src='./Images/no.png'>格式錯誤";
+            if (pwd.length < 6)
+                document.getElementById("pwdsp").innerHTML = "<img src='./Images/no.png'>密碼必須至少六個字";
+            if (pwd == "")
+                document.getElementById("pwdsp").innerHTML = "<img src='./Images/no.png'>密碼不可為空白";
+        }
+
+        function chkDate() {
+            var date = document.getElementById("date").value;
+            var dateObj = new Date(date);
+            var datearr1 = date.split("/");
+            var darearr2 = [dateObj.getFullYear(), dateObj.getMonth() + 1, dateObj.getDate()];
+            for (var i = 0; i < 3; i++)
+                if (datearr1[i] != darearr2[i]) {
+                    document.getElementById("datesp").innerHTML = "<img src='./Images/no.png'>格式錯誤";
+                    break;
+                }
+                else
+                    document.getElementById("datesp").innerHTML = "<img src='./Images/yes1.png'>格式正確";
+        }
+    </script>
+</body>
+
+</html>

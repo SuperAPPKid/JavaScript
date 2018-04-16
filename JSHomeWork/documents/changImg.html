@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>changeImg</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: auto;
+            padding: 0;
+            text-align: center;
+        }
+
+        #imgBox {
+            margin-top: 5%;
+            padding: 2%;
+            width: 80%;
+            border: solid 5px rgb(15, 45, 90);
+            border-radius: 30px;
+        }
+
+        img {
+            display: inline-block;
+            height: 300px;
+        }
+
+        #index {
+            width: 80%;
+            margin-top: 0.2%;
+        }
+
+        #index div {
+            display: inline-block;
+            width: 19%;
+            height: 10%;
+            float: left;
+            border: solid 3px rgb(15, 45, 90);
+            background-color: rgba(15, 45, 90, 0.438);
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 800;
+            padding: 3px;
+            margin: 0.5%;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div id="imgBox">
+        <img id="img" src="./Images/objc.png" alt="ERROR">
+        </div>
+        <div id="index">
+            <div style="color:white;background-color:rgb(15, 45, 90)"><span>Obj-c</span></div>
+            <div><span>Java</span></div>
+            <div><span>PHP&Mysql</span></div>
+            <div><span>Swift</span></div>
+            <div><span>Html&CSS&JS</span></div>
+        </div>
+        <script>
+            var imgarr = ["./Images/objc.png", "./Images/swift.jpg", "./Images/web.png", "./Images/php&mysql.png", "./Images/java.png"];
+            var index = 1;
+            var tabarr = [];
+            var t = setInterval(change, 1000);
+            for (var i = 0; i < 5; i++) {
+                tabarr[i] = document.getElementById("index").children[i]
+                tabarr[i].onclick = click;
+            }
+
+
+            function click() {
+                clear();
+                this.children[0].style.color = "white";
+                this.style.backgroundColor = "rgb(15, 45, 90)";
+                index = tabarr.indexOf(this);
+                document.getElementById("img").src = imgarr[index];
+            }
+
+            function change() {
+                if (index == 5) {
+                    index = 0;
+                }
+                clear();
+                document.getElementById("img").src = imgarr[index];
+                tabarr[index].children[0].style.color = "white";
+                tabarr[index].style.backgroundColor = "rgb(15, 45, 90)";
+                index++;
+            }
+
+            function clear() {
+                for (var i = 0; i < 5; i++) {
+                    document.getElementById("index").children[i].children[0].style.color = "black";
+                    document.getElementById("index").children[i].style.backgroundColor = "rgba(15, 45, 90, 0.438)";
+                }
+            }
+
+        </script>
+</body>
+
+</html>

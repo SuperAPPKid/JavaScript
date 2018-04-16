@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JShomework</title>
+    <style>
+        #box {
+            box-sizing: border-box;
+            text-align: center;
+            margin: auto;
+            margin-top: 2%;
+        }
+        iframe{
+            width: 75%;
+            height: 450px;
+            border-radius: 50px;
+            border: 2px solid gray;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <iframe src="./documents/99.html"></iframe>
+        <p>MAPD22 鍾正涵</p>
+        <button id="HW1">HW1</button>
+        <button id="HW2">HW2</button>
+        <button id="HW3">HW3</button>
+        <button id="HW4">HW4</button>
+        <button id="HW5">HW5</button>
+    </div>
+</body>
+<script>
+    var frame = document.getElementsByTagName("iframe")[0];
+    var htmlArr = ["./documents/99.html","./documents/IDcheck.html","./documents/STAR.html","./documents/date.html","./documents/changImg.html"];
+    var btnArr = [document.getElementById("HW1"),document.getElementById("HW2"),document.getElementById("HW3"),document.getElementById("HW4"),document.getElementById("HW5")]
+    for (var i = 0 ; i<5 ;i++){
+        btnArr[i].onclick = click;
+    }
+    function click() {
+     var index = btnArr.indexOf(this);
+     frame.src = htmlArr[index];
+    }
+</script>
+</html>
